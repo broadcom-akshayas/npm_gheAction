@@ -2,6 +2,8 @@
 
 ## Summary
 
+
+
 ## Start API
 
 * To start the main API on development mode from root solution folder.
@@ -19,7 +21,6 @@ $ npm start
 ```bash
 $ npm test
 ```
-
 
 ## Funtcional Test API
 
@@ -46,6 +47,8 @@ $ npm start
 ```bash
 $ npm run start:client
 ```
+
+
 
 * The `client`, will run in `localhost`, `port:1234`
 
