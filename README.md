@@ -23,7 +23,6 @@ $ npm start
 $ npm test
 ```
 
-
 ## Funtcional Test API
 
 ### To test `echo` with server, from `e2e` as root folder run:
