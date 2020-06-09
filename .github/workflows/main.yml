@@ -11,7 +11,9 @@ on:
 jobs:
   ci_job:
     runs-on: ubuntu-latest
-   
+    container:
+      image: node
+
     steps:
       - uses: actions/checkout@v1
       
