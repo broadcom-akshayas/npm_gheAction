@@ -2,7 +2,7 @@ name: Close stale pull requests
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/1 * * * *'
 
 jobs:
   close-stale-prs:
