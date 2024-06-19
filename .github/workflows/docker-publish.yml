@@ -1,0 +1,21 @@
+name: Delete Inactive Branches
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Runs every Monday at midnight
+  workflow_dispatch:
+
+jobs:
+  delete-inactive-branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Delete inactive branches
+        uses: tpai/github-delete-branch@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-delete: 90
+          exclude: main,master
