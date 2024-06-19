@@ -1,6 +1,8 @@
 name: Close stale pull requests
 
 on:
+  push:
+    branches: [ "master" ]
   schedule:
     - cron: '*/1 * * * *'
 
