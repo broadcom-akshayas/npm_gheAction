@@ -1,41 +1,21 @@
-name: Sample CI/CD
+name: Close stale pull requests
 
 on:
-  #push:
-  #  branches:
-  #   - master
-  pull_request:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight UTC
 
 jobs:
-  ci_job:
+  close-stale-prs:
     runs-on: ubuntu-latest
-    container:
-      image: node
-
     steps:
-      - uses: actions/checkout@v1
-      
-      - name: Install & Tests
-        run: |
-          npm install
-          npm test
-  cd_job:
-    runs-on: ubuntu-latest
-    needs:  ci_job
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    steps:
-      - uses: actions/checkout@v1
-      - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build
-        run: docker build -t back .
-      - name: Tags
-        run: |
-          docker tag back ${{ secrets.DOCKER_USER }}/back:${{ github.sha }}
-          docker tag back ${{ secrets.DOCKER_USER }}/back:latest
-      - name: Push
-        run: |
-          docker push ${{ secrets.DOCKER_USER }}/back:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/back:latest
+      - name: Close stale pull requests
+        uses: peter-evans/close-pull-requests@v2
+        with:
+          days-before-stale: 0
+          stale-pr-message: 'This PR has been automatically closed because it has not been merged within 30 days.'
+          days-before-close: 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
