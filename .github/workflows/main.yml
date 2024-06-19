@@ -20,4 +20,4 @@ jobs:
           stale-pr-message: 'This PR has been automatically closed because it has not been merged within 30 days.'
           days-before-close: 0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN}}
