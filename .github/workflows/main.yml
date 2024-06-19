@@ -6,18 +6,15 @@ on:
   schedule:
     - cron: '*/1 * * * *'
 
+
 jobs:
   close-stale-prs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Close stale pull requests
-        uses: peter-evans/close-pull-requests@v2
+      - uses: actions/stale@v8
         with:
-          days-before-stale: 0
-          stale-pr-message: 'This PR has been automatically closed because it has not been merged within 30 days.'
-          days-before-close: 0
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN}}
+          repo-token: ${{ secrets.REPO_TOKEN }}
+          stale-pr-message: 'This PR has not been updated in the last 30 days. Closing it for now. Please reopen if needed.'
+          days-before-pr-stale: 1
+          days-before-pr-close: 0
+          only-prs: true
